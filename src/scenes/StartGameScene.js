@@ -17,7 +17,10 @@ export default class StartGameScene extends Scene {
 
         const logo = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'logo')
         const startButton = this.add.image(this.cameras.main.centerX, logo.y+100, 'startbutton')
-        startButton.setScale(0.5, 0.5)
+
+
+        logo.setScale(1.5, 1.5)
+        startButton.setScale(0.8, 0.8)
         startButton.setInteractive().on('pointerdown', () => {
             console.log("START CLICKED")
             this.scene.start('introScene')

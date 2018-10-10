@@ -8,6 +8,7 @@ export default class BootScene extends Scene {
     }
 
     preload() {
+
         this.load.image('logo', logo)
         this.load.image('startbutton', startButton)
 
