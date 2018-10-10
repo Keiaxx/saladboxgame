@@ -12,13 +12,13 @@ export default class StartGameScene extends Scene {
         startButton.setScale(0.5, 0.5)
         startButton.setInteractive().on('pointerdown', () => {
             console.log("START CLICKED")
-            this.scene.start('BootScene')
+            this.scene.start('introScene')
+
         }).on('pointerover', ()=>{
             startButton.setAlpha(0.5)
         }).on('pointerout', ()=>{
             startButton.setAlpha(1)
         })
-
 
         this.tweens.add({
             targets: logo,
