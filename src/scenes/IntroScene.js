@@ -1,28 +1,7 @@
 import {Scene} from 'phaser'
 
 var content = [
-    "The sky above the port was the color of television, tuned to a dead channel.",
-    "`It's not like I'm using,' Case heard someone say, as he shouldered his way ",
-    "through the crowd around the door of the Chat. `It's like my body's developed",
-    "this massive drug deficiency.' It was a Sprawl voice and a Sprawl joke.",
-    "The Chatsubo was a bar for professional expatriates; you could drink there for",
-    "a week and never hear two words in Japanese.",
-    "",
-    "Ratz was tending bar, his prosthetic arm jerking monotonously as he filled a tray",
-    "of glasses with draft Kirin. He saw Case and smiled, his teeth a webwork of",
-    "East European steel and brown decay. Case found a place at the bar, between the",
-    "unlikely tan on one of Lonny Zone's whores and the crisp naval uniform of a tall",
-    "African whose cheekbones were ridged with precise rows of tribal scars. `Wage was",
-    "in here early, with two joeboys,' Ratz said, shoving a draft across the bar with",
-    "his good hand. `Maybe some business with you, Case?'",
-    "",
-    "Case shrugged. The girl to his right giggled and nudged him.",
-    "The bartender's smile widened. His ugliness was the stuff of legend. In an age of",
-    "affordable beauty, there was something heraldic about his lack of it. The antique",
-    "arm whined as he reached for another mug.",
-    "",
-    "",
-    "From Neuromancer by William Gibson"
+    "Welcome to the world of saladbox"
 ];
 
 var line = [];
@@ -30,8 +9,8 @@ var line = [];
 var wordIndex = 0;
 var lineIndex = 0;
 
-var wordDelay = 120;
-var lineDelay = 400;
+var wordDelay = 30;
+var lineDelay = wordDelay;
 
 export default class introScene extends Scene {
     constructor() {
@@ -40,7 +19,7 @@ export default class introScene extends Scene {
 
     create() {
 
-        this.text = this.add.text(32, 32, '', { font: "15px Arial", fill: "#19de65" });
+        this.text = this.add.text(this.cameras.main.centerX/2, this.cameras.main.centerY, '', { font: "15px Arial", fill: "#19de65" });
 
         this.nextLine();
 
@@ -48,17 +27,19 @@ export default class introScene extends Scene {
 
     nextLine() {
 
-        if (lineIndex === content.length)
+        if (lineIndex >= content.length)
         {
             //  We're finished
             return;
         }
 
         //  Split the current line on spaces, so one word per array element
-        line = content[lineIndex].split(' ');
+        line = content[lineIndex].split('');
 
         //  Reset the word index to zero (the first word in the line)
         wordIndex = 0;
+
+        console.log(line)
 
         //  Call the 'nextWord' function once for each word in the line (line.length)
 
@@ -66,7 +47,7 @@ export default class introScene extends Scene {
 
         this.time.addEvent({
             delay: wordDelay,
-            repeat: line.length,
+            repeat: line.length-1,
             callbackScope:this,
             callback: this.nextWord
         })
@@ -78,13 +59,14 @@ export default class introScene extends Scene {
      nextWord() {
 
         //  Add the next word onto the text string, followed by a space
-        this.text.text = this.text.text.concat(line[wordIndex] + " ");
+         console.log(wordIndex + " " + line[wordIndex] );
+        this.text.text = this.text.text.concat(line[wordIndex] + "");
 
         //  Advance the word index to the next word in the line
         wordIndex++;
 
         //  Last word?
-        if (wordIndex === line.length)
+        if (wordIndex >= line.length)
         {
             //  Add a carriage return
             this.text.text = this.text.text.concat("\n");
