@@ -1,5 +1,6 @@
 import {Scene} from 'phaser'
 import menuMusic from '../assets/audio/menu.ogg'
+import menuMusicMp3 from '../assets/audio/menu.mp3'
 
 export default class StartGameScene extends Scene {
     constructor() {
@@ -7,7 +8,7 @@ export default class StartGameScene extends Scene {
     }
 
     preload(){
-        this.load.audio('theme', [menuMusic
+        this.load.audio('theme', [menuMusicMp3, menuMusic
         ]);
     }
 
