@@ -166,7 +166,7 @@ DialogModalPlugin.prototype = {
             text,
             style: {
                 wordWrap: {width: this._getGameWidth() - (this.padding * 2) - 25},
-                font: "40px Arial", fill: "#19de65"
+                font: "40px gamer", fill: "#19de65"
             }
         });
     },

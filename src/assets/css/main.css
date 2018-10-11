@@ -1,0 +1,25 @@
+@font-face {
+    font-family: "gamer";
+    src: url("../fonts/yoster.ttf");
+}
+.text {
+    width: 33.3%;
+    float:left;
+    font-family: "gamer";
+}
+html, body {
+    margin: 0;
+    padding: 0;
+}
+canvas {
+    padding: 0;
+    margin: auto;
+    display: block;
+    width: 720px;
+    height: 1280px;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}

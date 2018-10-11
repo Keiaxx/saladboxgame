@@ -8,13 +8,11 @@ export default class StartGameScene extends Scene {
     }
 
     preload(){
-        this.load.audio('theme', [menuMusicMp3, menuMusic
-        ]);
+
+        this.load.audio('theme', [menuMusicMp3, menuMusic]);
     }
 
     create() {
-
-
 
         const logo = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'logo')
         const startButton = this.add.image(this.cameras.main.centerX, logo.y+100, 'startbutton')
@@ -45,5 +43,6 @@ export default class StartGameScene extends Scene {
             yoyo: true,
             loop: -1
         })
+
     }
 }

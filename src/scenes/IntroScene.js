@@ -19,6 +19,6 @@ export default class introScene extends Scene {
             'You think to yourself. "Hmm, I could eat McDonalds or... wait a second... AHA."',
             'You run downstairs to the fridge and find a fresh bag of lettuce',
             'As loud as you could you yelled, "SALAD BOX LUNCH TIME XBOX 1337 GUYS"'
-        ], false)
+        ], true)
     }
 }

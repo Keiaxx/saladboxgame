@@ -1,4 +1,5 @@
 import Phaser from 'phaser'
+import './assets/css/main.css'
 import BootScene from './scenes/BootScene'
 import StartGameScene from './scenes/StartGameScene'
 import introScene from './scenes/IntroScene'
