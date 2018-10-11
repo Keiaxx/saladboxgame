@@ -2,6 +2,19 @@
     font-family: "gamer";
     src: url("../fonts/yoster.ttf");
 }
+@font-face {
+    font-family: "adventurer";
+    src: url("../fonts/Adventurer.ttf");
+}
+@font-face {
+    font-family: 'superscript';
+    src:url('../fonts/superscript.ttf.woff') format('woff'),
+    url('../fonts/superscript.ttf.svg#superscript') format('svg'),
+    url('../fonts/superscript.ttf.eot'),
+    url('../fonts/superscript.ttf.eot?#iefix') format('embedded-opentype');
+    font-weight: normal;
+    font-style: normal;
+}
 .text {
     width: 33.3%;
     float:left;

@@ -4,9 +4,11 @@ export default class introScene extends Scene {
         super({key: 'introScene'})
     }
     create() {
+        var self = this;
         this.dialog.init({
             windowHeight: 300,
             dialogSpeed: 10,
+            fontFamily: 'adventurer',
             onDone: function () {
                 console.log("DONE");
             },

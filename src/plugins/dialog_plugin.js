@@ -48,6 +48,7 @@ DialogModalPlugin.prototype = {
         this.closeBtnColor = opts.closeBtnColor || 'darkgoldenrod';
         this.dialogSpeed = opts.dialogSpeed || 3;
 
+        this.fontFamily = opts.fontFamily || 'gamer';
         this.eventCounter = 0;
         this.visible = true;
         this.text;
@@ -166,7 +167,7 @@ DialogModalPlugin.prototype = {
             text,
             style: {
                 wordWrap: {width: this._getGameWidth() - (this.padding * 2) - 25},
-                font: "40px gamer", fill: "#19de65"
+                font: "40px "+this.fontFamily, fill: "#a9aca4"
             }
         });
     },

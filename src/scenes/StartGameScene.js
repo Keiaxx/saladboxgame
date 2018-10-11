@@ -12,6 +12,12 @@ export default class StartGameScene extends Scene {
         this.load.audio('theme', [menuMusicMp3, menuMusic]);
     }
 
+    toggleMenuMusic(){
+
+    }
+
+
+
     create() {
 
         const logo = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'logo')
@@ -23,6 +29,7 @@ export default class StartGameScene extends Scene {
         startButton.setInteractive().on('pointerdown', () => {
             console.log("START CLICKED")
             this.scene.start('introScene')
+            this.scene.stop('StartGameScene');
 
         }).on('pointerover', ()=>{
             startButton.setAlpha(0.5)
@@ -43,6 +50,12 @@ export default class StartGameScene extends Scene {
             yoyo: true,
             loop: -1
         })
+
+
+        this.events.on('shutdown', function(){
+            console.log("Stopping menu music");
+            music.stop();
+        });
 
     }
 }
