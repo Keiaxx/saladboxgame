@@ -12,9 +12,50 @@ export default class BootScene extends Scene {
         this.load.image('logo', logo)
         this.load.image('startbutton', startButton)
 
+
     }
 
     create() {
+        this.add.text(16, 16, 'BootScene', { fontSize: '16px', fontFamily: 'adventurer', fill: '#FFF' });
         this.scene.start('StartGameScene')
+        // function fs_status()
+        // {
+        //     if(document.fullscreenElement)
+        //     {
+        //         return true;
+        //     }
+        //     else if(document.webkitFullscreenElement)
+        //     {
+        //         return true;
+        //     }
+        //     else if(document.mozFullScreenElement)
+        //     {
+        //         return true;
+        //     }
+        //     else
+        //     {
+        //         return false;
+        //     }
+        // }
+        //
+        // function goFullscreen()
+        // {
+        //     if(fs_status())
+        //     {
+        //         return;
+        //     }
+        //
+        //     var el = document.getElementsByTagName('canvas')[0];
+        //     var requestFullScreen = el.requestFullscreen || el.msRequestFullscreen || el.mozRequestFullScreen || el.webkitRequestFullscreen;
+        //
+        //     if(requestFullScreen)
+        //     {
+        //         requestFullScreen.call(el);
+        //     }
+        // }
+        //
+        // document.getElementsByTagName('div')[0].addEventListener('click', goFullscreen);
+
+
     }
 }

@@ -3,18 +3,24 @@ import './assets/css/main.css'
 import BootScene from './scenes/BootScene'
 import StartGameScene from './scenes/StartGameScene'
 import introScene from './scenes/IntroScene'
+import UserInterfaceScene from './scenes/UserInterfaceScene'
 
 import dialogPlugin from './plugins/dialog_plugin'
+import choicePLugin from './plugins/choice_dialog'
+
+
 
 const config = {
   type: Phaser.CANVAS,
   parent: 'app',
   width: 720,
     height: 1280,
-  scene: [BootScene, StartGameScene, introScene],
+  scene: [BootScene, UserInterfaceScene, StartGameScene, introScene],
+    "render.transparent"    : true,
     plugins: {
         scene: [
-            { key: 'DialogModalPlugin', plugin: dialogPlugin, mapping: 'dialog' }
+            { key: 'DialogModalPlugin', plugin: dialogPlugin, mapping: 'dialog' },
+            { key: 'ChoiceDialogPlugin', plugin: choicePLugin, mapping: 'choiceDialog' }
         ]
     },
 }

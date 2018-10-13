@@ -1,20 +1,19 @@
 //Thanks https://gamedevacademy.org/create-a-dialog-modal-plugin-in-phaser-3-part-2/
 
-var DialogModalPlugin = function (scene) {
+var ChoiceDialogPlugin = function (scene) {
     this.scene = scene;
     this.systems = scene.sys;
-
 
     if (!scene.sys.settings.isBooted) {
         scene.sys.events.once('boot', this.boot, this);
     }
 };
 
-DialogModalPlugin.register = function (PluginManager) {
-    PluginManager.register('DialogModalPlugin', DialogModalPlugin, 'dialogModal');
+ChoiceDialogPlugin.register = function (PluginManager) {
+    PluginManager.register('ChoiceDialogPlugin', ChoiceDialogPlugin, 'choiceDialog');
 };
 
-DialogModalPlugin.prototype = {
+ChoiceDialogPlugin.prototype = {
     // called when the plugin is loaded by the PluginManager
     boot: function () {
         var eventEmitter = this.systems.events;
@@ -50,6 +49,8 @@ DialogModalPlugin.prototype = {
         this.dialogSpeed = opts.dialogSpeed || 3;
 
         this.fontFamily = opts.fontFamily || 'gamer';
+        this.choices = opts.choices || ['No Choices'];
+        this.fontPixelSize = opts.fontPixelSize || 40;
         this.eventCounter = 0;
         this.visible = true;
         this.text;
@@ -59,8 +60,11 @@ DialogModalPlugin.prototype = {
         this.lines;
         this.linecount = 0;
         this.currentline = 0;
+        this.question = opts.question || '';
 
-        this.onDone = opts.onDone || function () {
+        this.choiceTexts;
+
+        this.onChoice = opts.onChoice || function (choice) {
         };
         this.onProgress = opts.onProgress || function () {
         };
@@ -68,6 +72,8 @@ DialogModalPlugin.prototype = {
 
         // Create the dialog window
         this._createWindow();
+        this.setText(this.question, false);
+        this.showChoices();
     },
 
     // Hide/Show the dialog window
@@ -108,7 +114,6 @@ DialogModalPlugin.prototype = {
             }, this);
         }
     },
-
     setMultistageText: function (text, animate) {
         // Reset the dialog
         this.lines = text;
@@ -126,7 +131,7 @@ DialogModalPlugin.prototype = {
 
         if (animate) {
             this.timedEvent = this.scene.time.addEvent({
-                delay: this.dialogSpeed,
+                delay: 150 - (this.dialogSpeed * 30),
                 callback: this._animateText,
                 callbackScope: this,
                 loop: true
@@ -146,7 +151,7 @@ DialogModalPlugin.prototype = {
 
         if (animate) {
             this.timedEvent = this.scene.time.addEvent({
-                delay: this.dialogSpeed,
+                delay: 150 - (this.dialogSpeed * 30),
                 callback: this._animateText,
                 callbackScope: this,
                 loop: true
@@ -168,16 +173,55 @@ DialogModalPlugin.prototype = {
             text,
             style: {
                 wordWrap: {width: this._getGameWidth() - (this.padding * 2) - 25},
-                font: "40px "+this.fontFamily, fill: "#a9aca4"
+                font: this.fontPixelSize+"px "+this.fontFamily, fill: "#a9aca4"
             }
         }).setScrollFactor(0);
+    },
+
+    showChoices: function(){
+        var x = this.padding + 10;
+        var y = this._getGameHeight() + this.fontPixelSize - this.windowHeight - this.padding + 20;
+
+        this.choiceTexts = [];
+
+        for(let i in this.choices){
+
+            let choice = this.choices[i]
+            let madeText = this.scene.make.text({
+                x,
+                y,
+                text: choice,
+                style: {
+                    wordWrap: {width: this._getGameWidth() - (this.padding * 2) - 25},
+                    font: this.fontPixelSize+"px "+this.fontFamily, fill: "#a9aca4"
+                }
+            }).setScrollFactor(0);
+            madeText.setInteractive();
+            madeText.on('pointerup', function () {
+                console.log("INTERACTIVE CLICK")
+                this.onChoice(i);
+
+                this.toggleWindow();
+                if (this.timedEvent) this.timedEvent.remove();
+                if (this.text) this.text.destroy();
+                if (this.choiceTexts) {
+                    for(let j in this.choiceTexts){
+                        this.choiceTexts[j].destroy();
+                    }
+                }
+            }, this);
+            this.choiceTexts.push(madeText);
+            y = y + this.fontPixelSize + 10;
+        }
+
+
     },
 
     // Creates the dialog window
     _createWindow: function () {
         var gameHeight = this._getGameHeight();
         var gameWidth = this._getGameWidth();
-        var windowDimensions = this._calculateWindowDimensions(gameWidth, gameHeight);
+        var windowDimensions = this._calculateWindowDimensions(gameWidth, gameHeight, this.choices.length);
         this.graphics = this.scene.add.graphics();
 
         this._createOuterWindow(windowDimensions);
@@ -199,6 +243,7 @@ DialogModalPlugin.prototype = {
 
     // Calculates where to place the dialog window based on the game size
     _calculateWindowDimensions: function (width, height) {
+        this.windowHeight = ((this.choices.length+1) * this.fontPixelSize) + this.fontPixelSize + this.padding;
         var x = this.padding;
         var y = height - this.windowHeight - this.padding;
         var rectWidth = width - (this.padding * 2);
@@ -241,7 +286,7 @@ DialogModalPlugin.prototype = {
                 font: 'bold 12px Arial',
                 fill: this.closeBtnColor
             }
-        });
+        }).setScrollFactor(0);
         this.closeBtn.setInteractive();
 
         this.closeBtn.on('pointerover', function () {
@@ -263,8 +308,8 @@ DialogModalPlugin.prototype = {
     }
 };
 
-DialogModalPlugin.prototype.constructor = DialogModalPlugin;
+ChoiceDialogPlugin.prototype.constructor = ChoiceDialogPlugin;
 
 //  Make sure you export the plugin for webpack to expose
 
-module.exports = DialogModalPlugin;
+module.exports = ChoiceDialogPlugin;
