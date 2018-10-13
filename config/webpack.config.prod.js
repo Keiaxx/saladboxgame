@@ -57,7 +57,7 @@ module.exports = {
     },
     output: {
         path: paths.appBuild,
-        publicPath: '/',
+        publicPath: '/saladboxgame/',
         filename: 'js/[name].[chunkhash:8].bundle.js'
     },
     module: {
