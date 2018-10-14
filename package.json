@@ -5,7 +5,7 @@
   "scripts": {
     "start": "node scripts/start",
     "build": "node scripts/build",
-    "deploy": "git subtree push --prefix build origin gh-pages"
+    "deploy": "git add build/* && git commit -m 'Push gh-pages' && git subtree push --prefix build origin gh-pages"
   },
   "dependencies": {
     "babel-preset-es2015": "^6.24.1",

@@ -13,6 +13,7 @@ import choicePLugin from './plugins/choice_dialog'
 const config = {
   type: Phaser.CANVAS,
   parent: 'app',
+    pixelArt: true,
   width: 720,
     height: 1280,
   scene: [BootScene, UserInterfaceScene, StartGameScene, introScene],

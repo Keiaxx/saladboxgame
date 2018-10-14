@@ -66,8 +66,6 @@ export default class StartGameScene extends Scene {
 
         var angle = Phaser.Math.Angle.Between(player.x, player.y, this.input.x + this.cameras.main.scrollX, this.input.y + this.cameras.main.scrollY) * (180 / Math.PI);;
 
-        console.log(angle);
-
         if(move) {
             if (angle > -90 && angle < 0) {
                 player.body.setVelocityX(260);
