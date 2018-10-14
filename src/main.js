@@ -23,6 +23,13 @@ const config = {
             { key: 'ChoiceDialogPlugin', plugin: choicePLugin, mapping: 'choiceDialog' }
         ]
     },
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: { y: 300 },
+            debug: true
+        }
+    }
 }
 
 

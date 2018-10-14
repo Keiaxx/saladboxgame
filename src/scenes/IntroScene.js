@@ -57,6 +57,7 @@ export default class introScene extends Scene {
 
         music.play();
         music.setLoop(true);
+        music.setVolume(0.02);
 
 
 
