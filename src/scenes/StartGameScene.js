@@ -73,18 +73,22 @@ export default class StartGameScene extends Scene {
                 player.body.setVelocityX(260);
 
                 player.anims.play('walk', true);
+                player.flipX = true;
             } else if (angle > 0 && angle < 90) {
                 player.body.setVelocityX(260);
 
                 player.anims.play('walk', true);
+                player.flipX = true;
             } else if (angle > 90 && angle < 180) {
                 player.body.setVelocityX(-260);
 
                 player.anims.play('walk', true);
+                player.flipX = false;
             } else if (angle > -180 && angle < -90) {
                 player.body.setVelocityX(-260);
 
                 player.anims.play('walk', true);
+                player.flipX = false;
             }
         }else{
             player.body.setVelocityX(0);
