@@ -8,36 +8,7 @@ import UserInterfaceScene from './scenes/UserInterfaceScene'
 import dialogPlugin from './plugins/dialog_plugin'
 import choicePLugin from './plugins/choice_dialog'
 
-
-
-const config = {
-  type: Phaser.CANVAS,
-  parent: 'app',
-    pixelArt: true,
-  width: 720,
-    height: 1280,
-  scene: [BootScene, UserInterfaceScene, StartGameScene, introScene],
-    "render.transparent"    : true,
-    plugins: {
-        scene: [
-            { key: 'DialogModalPlugin', plugin: dialogPlugin, mapping: 'dialog' },
-            { key: 'ChoiceDialogPlugin', plugin: choicePLugin, mapping: 'choiceDialog' }
-        ]
-    },
-    physics: {
-        default: 'arcade',
-        arcade: {
-            gravity: { y: 300 },
-            debug: true
-        }
-    }
-}
-
-
-
-
-const game = new Phaser.Game(config)
-window.game = game
+window.onload = startGame();
 
 function create () {
     window.addEventListener('resize', resize);
@@ -48,16 +19,48 @@ function create () {
 }
 
 function resize() {
-    var canvas = game.canvas, width = window.innerWidth, height = window.innerHeight;
-    var wratio = width / height, ratio = canvas.width / canvas.height;
-
-    if (wratio < ratio) {
-        canvas.style.width = width + "px";
-        canvas.style.height = (width / ratio) + "px";
-    } else {
-        canvas.style.width = (height * ratio) + "px";
-        canvas.style.height = height + "px";
+    var canvas = document.querySelector("canvas");
+    var windowWidth = window.innerWidth;
+    var windowHeight = window.innerHeight;
+    var windowRatio = windowWidth / windowHeight;
+    var gameRatio = game.config.width / game.config.height;
+    if(windowRatio < gameRatio){
+        canvas.style.width = windowWidth + "px";
+        canvas.style.height = (windowWidth / gameRatio) + "px";
+    }
+    else{
+        canvas.style.width = (windowHeight * gameRatio) + "px";
+        canvas.style.height = windowHeight + "px";
     }
 }
 
-create();
+function startGame(){
+
+    var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+
+    const config = {
+        type: Phaser.CANVAS,
+        parent: 'app',
+        pixelArt: true,
+        width: 1280,
+        height: 720,
+        scene: [BootScene, UserInterfaceScene, StartGameScene, introScene],
+        "render.transparent"    : true,
+        plugins: {
+            scene: [
+                { key: 'DialogModalPlugin', plugin: dialogPlugin, mapping: 'dialog' },
+                { key: 'ChoiceDialogPlugin', plugin: choicePLugin, mapping: 'choiceDialog' }
+            ]
+        },
+        physics: {
+            default: 'arcade',
+            arcade: {
+                gravity: { y: 900 },
+                debug: true
+            }
+        }
+    }
+    const game = new Phaser.Game(config)
+    window.game = game
+    create()
+}
