@@ -39,7 +39,7 @@ function startGame(){
     var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
     const config = {
-        type: Phaser.CANVAS,
+        type: Phaser.WEBGL,
         parent: 'app',
         pixelArt: true,
         width: 1280,
