@@ -143,7 +143,7 @@ ChoiceDialogPlugin.prototype = {
     this.dialog = text.split('')
     if (this.timedEvent) this.timedEvent.remove()
 
-    var tempText = animatse ? '' : text
+    var tempText = animate ? '' : text
     this._setText(tempText)
 
     if (animate) {
