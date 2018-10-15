@@ -1,6 +1,7 @@
 import { Scene } from 'phaser'
 
 import MainCharacter from '../classes/characters/MainCharacter'
+import forestJSON from '../assets/maps/forest/forest.json'
 
 var image1
 var tween
@@ -21,9 +22,26 @@ export default class StartGameScene extends Scene {
 
   update (time, delta) {
     this.player.update(this.input, move, cursors, time, delta);
+    this.forest1.tilePositionX -= 2;
+    this.forest2.tilePositionX -= 1.9;
+    this.forest3.tilePositionX -= 1.7;
+    this.forest4.tilePositionX -= 1.5;
+    this.forest5.tilePositionX -= 1.3;
+    this.forest6.tilePositionX -= 1.1;
+    this.forest7.tilePositionX -= 1.0;
+    this.forest8.tilePositionX -= .9;
+    this.forest9.tilePositionX -= .7;
+    this.forest10.tilePositionX -= .5;
+    this.forest11.tilePositionX -= .3;
+
+  }
+
+  preload(){
+    this.load.tilemapTiledJSON("forestmap", forestJSON)
   }
 
   create () {
+
     //
     // this.add.image(1,1, 'back1')
 
@@ -31,6 +49,7 @@ export default class StartGameScene extends Scene {
     // row1: intense idle anim
     // row2: walk anim
     // row3: subtle idle anim
+
 
     this.cameras.main.roundPixels = true;
 
@@ -51,6 +70,21 @@ export default class StartGameScene extends Scene {
 
     // player = this.physics.add.sprite(200, 300, 'char1', 6).setScale(scale)
 
+
+    this.forest11 = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, this.game.config.width, 793, 'forest11')
+    this.forest10 = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, this.game.config.width, 793, 'forest10')
+    this.forest9 = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, this.game.config.width, 793, 'forest9')
+    this.forest8 = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, this.game.config.width, 793, 'forest8')
+    this.forest7 = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, this.game.config.width, 793, 'forest7')
+    this.forest6 = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, this.game.config.width, 793, 'forest6')
+    this.forest5 = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, this.game.config.width, 793, 'forest5')
+    this.forest4 = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, this.game.config.width, 793, 'forest4')
+
+    this.forest3 = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, this.game.config.width, 793, 'forest3')
+
+    this.forest2 = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, this.game.config.width, 793, 'forest2')
+
+
     this.player = new MainCharacter({
       scene: this,
       key: 'char1',
@@ -58,6 +92,9 @@ export default class StartGameScene extends Scene {
       y: 300,
       scale: scale
     })
+
+    this.forest1 = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, this.game.config.width, 793, 'forest1')
+
 
 
     //
@@ -128,5 +165,9 @@ export default class StartGameScene extends Scene {
     this.input.on('pointerup', function (cursor) {
       move = false
     }, this)
+
+
+
+
   }
 }
