@@ -16,11 +16,27 @@ var walksprite
 var move = false
 var moveRight = false
 export default class StartGameScene extends Scene {
+  // constructor () {
+  //   super({
+  //     key: 'StartGameScene',
+  //     physics: {
+  //       arcade: {
+  //         debug: true,
+  //         gravity: { y: 200 }
+  //       },
+  //       matter: {
+  //         debug: true,
+  //         gravity: { y: 0.5 }
+  //       }
+  //     }
+  //   })
+  // }
   constructor () {
     super({key: 'StartGameScene'})
   }
 
   update (time, delta) {
+    //this.physics.world.collide(this.player, this.button_resume);
     this.player.update(this.input, move, cursors, time, delta);
     this.forest1.tilePositionX -= 2;
     this.forest2.tilePositionX -= 1.9;
@@ -54,6 +70,7 @@ export default class StartGameScene extends Scene {
     this.cameras.main.roundPixels = true;
 
     this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height, true, true, true, true)
+    //this.matter.world.setBounds();
 
     var scale = 3
     this.cameras.main.setBackgroundColor('rgba(255, 255, 255, 0.5)')

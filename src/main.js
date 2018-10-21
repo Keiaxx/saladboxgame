@@ -53,8 +53,12 @@ function startGame () {
     physics: {
       default: 'arcade',
       arcade: {
-        gravity: {y: 900},
-        debug: true
+        debug: true,
+        gravity: { y: 900 }
+      },
+      matter: {
+        debug: true,
+        gravity: { y: 0.5 }
       }
     }
   }
