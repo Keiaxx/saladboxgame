@@ -40,6 +40,7 @@ function startGame () {
     type: Phaser.WEBGL,
     parent: 'app',
     pixelArt: true,
+    roundPixels: true,
     width: 1280,
     height: 720,
     scene: [BootScene, UserInterfaceScene, StartGameScene, introScene],
