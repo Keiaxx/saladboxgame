@@ -11,6 +11,11 @@ export default class MainCharacter extends Phaser.GameObjects.Sprite {
     this.body.setCollideWorldBounds(true)
 
     this.keys = config.scene.input.keyboard.addKeys('W,A,S,D,SPACE')
+
+
+    this.body.setSize(20, 32, false)
+    console.log("CURRENT OFFSET " + JSON.stringify(this.body.offset));
+    this.body.setOffset(6, 0)
   }
 
   moveLeft(){
