@@ -1,5 +1,5 @@
 import { Scene } from 'phaser'
-import logo from '../assets/logo.png'
+import logo from '../assets/title.png'
 import startButton from '../assets/shittystartbutton.png'
 
 //Boot assets
