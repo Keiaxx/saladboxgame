@@ -95,23 +95,27 @@ export default class StartGameScene extends Scene {
 
     this.forest1 = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, this.game.config.width, 793, 'forest1')
 
+    /** Logo and logo bounce tween */
+    var logoY = this.cameras.main.centerY-100
+    const logo = this.add.image(this.cameras.main.centerX, logoY, 'logo')
+    this.tweens.add({
+      targets: logo,
+      y: logoY - 10,
+      duration: ((60000 / 145) / 2),
+      ease: 'Power2',
+      yoyo: true,
+      loop: -1
+    })
 
+    /** Button Location and scaling **/
+    var buttonStartX = 150
+    var buttonStartY = logo.y+100;
+    var paddingBetweenButtons = 25;
+    var buttonScale = 2
 
-    //
-    // var subtle = {
-    //     key: 'subtle',
-    //     frames: this.anims.generateFrameNumbers('char1', { start: 9, end: 11 }),
-    //     frameRate: 10,
-    //     yoyo: false,
-    //     repeat: -1
-    // };
-    // this.anims.create(subtle);
-    // var subsprite = this.add.sprite(400, 300, 'char1').setScale(scale);
-    // subsprite.anims.load('subtle');
-    // subsprite.anims.play('subtle');
-
-    const logo = this.add.image(this.cameras.main.centerX, this.cameras.main.centerY, 'logo')
-    const startButton = this.add.image(this.cameras.main.centerX, logo.y + 100, 'startbutton')
+    this.button_resume = this.add.sprite(buttonStartX, buttonStartY, 'buttons').setFrame(0).setScale(buttonScale)
+    this.button_newgame = this.add.sprite(buttonStartX, this.button_resume.y + (this.button_resume.height*buttonScale) + paddingBetweenButtons, 'buttons').setFrame(2).setScale(buttonScale)
+    this.button_settings = this.add.sprite(buttonStartX, this.button_newgame.y + (this.button_newgame.height*buttonScale) + paddingBetweenButtons, 'buttons').setFrame(4).setScale(buttonScale)
 
     this.add.text(16, 16, 'v0.01', {fontSize: '16px', fontFamily: 'adventurer', fill: '#FFF'})
     this.add.text(16, this.sys.game.config.height - 20, 'Song: Saladbox Adventure - Keiaxx', {
@@ -121,15 +125,34 @@ export default class StartGameScene extends Scene {
     })
 
     logo.setScale(1.5, 1.5)
-    startButton.setScale(0.8, 0.8)
-    startButton.setInteractive().on('pointerdown', () => {
-      console.log('START CLICKED')
+
+    // startButton.setScale(0.8, 0.8)
+    this.button_resume.setInteractive().on('pointerdown', () => {
+      console.log('Resume Clicked')
+    }).on('pointerover', () => {
+      this.button_resume.setFrame(1)
+    }).on('pointerout', () => {
+      this.button_resume.setFrame(0)
+    })
+
+    // startButton.setScale(0.8, 0.8)
+    this.button_newgame.setInteractive().on('pointerdown', () => {
+      console.log('New Game Clicked')
       this.scene.start('UserInterfaceScene')
       this.scene.start('introScene')
     }).on('pointerover', () => {
-      startButton.setAlpha(0.5)
+      this.button_newgame.setFrame(3)
     }).on('pointerout', () => {
-      startButton.setAlpha(1)
+      this.button_newgame.setFrame(2)
+    })
+
+    // startButton.setScale(0.8, 0.8)
+    this.button_settings.setInteractive().on('pointerdown', () => {
+      console.log('Settings Clicked')
+    }).on('pointerover', () => {
+      this.button_settings.setFrame(5)
+    }).on('pointerout', () => {
+      this.button_settings.setFrame(4)
     })
 
     let music = this.sound.add('theme')
@@ -138,14 +161,7 @@ export default class StartGameScene extends Scene {
     music.setLoop(true)
     music.setVolume(0.02)
 
-    this.tweens.add({
-      targets: logo,
-      y: this.cameras.main.centerY - 10,
-      duration: ((60000 / 145) / 2),
-      ease: 'Power2',
-      yoyo: true,
-      loop: -1
-    })
+
 
     var self = this
     this.events.on('shutdown', function () {
