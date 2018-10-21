@@ -27,15 +27,13 @@ function resize () {
   if (windowRatio < gameRatio) {
     canvas.style.width = windowWidth + 'px'
     canvas.style.height = (windowWidth / gameRatio) + 'px'
-  }
-  else {
+  } else {
     canvas.style.width = (windowHeight * gameRatio) + 'px'
     canvas.style.height = windowHeight + 'px'
   }
 }
 
 function startGame () {
-
   var width = Math.max(document.documentElement.clientWidth, window.innerWidth || 0)
 
   const config = {

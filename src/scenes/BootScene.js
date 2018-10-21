@@ -82,7 +82,6 @@ export default class BootScene extends Scene {
     this.add.text(16, 16, 'BootScene', {fontSize: '16px', fontFamily: 'adventurer', fill: '#FFF'})
     this.scene.start('StartGameScene')
 
-
     // function fs_status()
     // {
     //     if(document.fullscreenElement)

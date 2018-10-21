@@ -8,10 +8,9 @@ export default class MainCharacter extends Phaser.GameObjects.Sprite {
     this.acceleration = 600
     this.body.maxVelocity.x = 300
     this.body.maxVelocity.y = 500
-    this.body.setCollideWorldBounds(true);
+    this.body.setCollideWorldBounds(true)
 
-    this.keys = config.scene.input.keyboard.addKeys('W,A,S,D,SPACE');
-
+    this.keys = config.scene.input.keyboard.addKeys('W,A,S,D,SPACE')
   }
 
   moveLeft(){
@@ -33,7 +32,7 @@ export default class MainCharacter extends Phaser.GameObjects.Sprite {
   }
 
   update (input, move, cursors, time, delta) {
-    var angle = Phaser.Math.Angle.Between(this.body.x, this.body.y, input.x + this.scene.cameras.main.scrollX, input.y + this.scene.cameras.main.scrollY) * (180 / Math.PI)
+    let angle = Phaser.Math.Angle.Between(this.body.x, this.body.y, input.x + this.scene.cameras.main.scrollX, input.y + this.scene.cameras.main.scrollY) * (180 / Math.PI)
 
     if (move) {
       if (angle > -90 && angle < 0) {
@@ -49,11 +48,11 @@ export default class MainCharacter extends Phaser.GameObjects.Sprite {
       this.moveLeft()
     } else if (cursors.right.isDown || this.keys.D.isDown) {
       this.moveRight()
-    } else{
+    } else {
       this.body.setVelocityX(0)
       this.anims.play('subtle', true)
     }
-    if((cursors.up.isDown || this.keys.SPACE.isDown) && this.body.velocity.y === 0) {
+    if ((cursors.up.isDown || this.keys.SPACE.isDown) && this.body.velocity.y === 0) {
       this.jump()
     }
   }
