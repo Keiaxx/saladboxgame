@@ -69,7 +69,7 @@ export default class StartGameScene extends Scene {
 
     this.cameras.main.roundPixels = true;
 
-    this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height, true, true, true, true)
+    this.physics.world.setBounds(0, 0, this.game.config.width, this.game.config.height - 30, true, true, true, true)
     //this.matter.world.setBounds();
 
     var scale = 3
@@ -105,19 +105,20 @@ export default class StartGameScene extends Scene {
     this.player = new MainCharacter({
       scene: this,
       key: 'char1',
-      x: 200,
-      y: 300,
+      x: this.game.config.width - 100,
+      y: 0,
       scale: scale
     })
 
     this.forest1 = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, this.game.config.width, 793, 'forest1')
 
     /** Logo and logo bounce tween */
-    var logoY = this.cameras.main.centerY-100
+    var logoY = this.cameras.main.centerY - 50
     const logo = this.add.image(this.cameras.main.centerX, logoY, 'logo')
+    logo.setScale(2)
     this.tweens.add({
       targets: logo,
-      y: logoY - 10,
+      y: logoY - 20,
       duration: ((60000 / 145) / 2),
       ease: 'Power2',
       yoyo: true,
@@ -126,7 +127,7 @@ export default class StartGameScene extends Scene {
 
     /** Button Location and scaling **/
     var buttonStartX = 150
-    var buttonStartY = logo.y+100;
+    var buttonStartY = logo.y+160;
     var paddingBetweenButtons = 25;
     var buttonScale = 2
 
@@ -141,7 +142,7 @@ export default class StartGameScene extends Scene {
       fill: '#FFF'
     })
 
-    logo.setScale(1.5, 1.5)
+
 
     // startButton.setScale(0.8, 0.8)
     this.button_resume.setInteractive().on('pointerdown', () => {
