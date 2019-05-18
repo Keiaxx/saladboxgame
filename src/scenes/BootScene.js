@@ -15,19 +15,24 @@ import menuMusic from '../assets/audio/menu.ogg'
 import menuMusicMp3 from '../assets/audio/menu.mp3'
 import buttons from '../assets/main_menu_buttons.png'
 
-//forest
-import forest1 from '../assets/maps/forest/forest1.png'
-import forest2 from '../assets/maps/forest/forest2.png'
-import forest3 from '../assets/maps/forest/forest3.png'
-import forest4 from '../assets/maps/forest/forest4.png'
-import forest5 from '../assets/maps/forest/forest5.png'
-import forest6 from '../assets/maps/forest/forest6.png'
-import forest7 from '../assets/maps/forest/forest7.png'
-import forest8 from '../assets/maps/forest/forest8.png'
-import forest9 from '../assets/maps/forest/forest9.png'
-import forest10 from '../assets/maps/forest/forest10.png'
-import forest11 from '../assets/maps/forest/forest11.png'
-import forestcollision from '../assets/maps/forest/forestcollision.png'
+//forest_snow
+import forest1 from '../assets/maps/forest_snow/forest1.png'
+import forest2 from '../assets/maps/forest_snow/forest2.png'
+import forest3 from '../assets/maps/forest_snow/forest3.png'
+import forest4 from '../assets/maps/forest_snow/forest4.png'
+import forest5 from '../assets/maps/forest_snow/forest5.png'
+import forest6 from '../assets/maps/forest_snow/forest6.png'
+import forest7 from '../assets/maps/forest_snow/forest7.png'
+import forest8 from '../assets/maps/forest_snow/forest8.png'
+import forest9 from '../assets/maps/forest_snow/forest9.png'
+import forest10 from '../assets/maps/forest_snow/forest10.png'
+import forest11 from '../assets/maps/forest_snow/forest11.png'
+import forestcollision from '../assets/maps/forest_snow/forestcollision.png'
+
+//sprites
+import hamburg from '../assets/sprites/junkies/hamburg.png'
+import poppy from '../assets/sprites/junkies/poppy.png'
+import marshy from '../assets/sprites/junkies/marshy.png'
 
 var loadingText;
 
@@ -85,7 +90,7 @@ export default class BootScene extends Scene {
     this.load.image('back1', back1)
     this.load.audio('angry', [angry])
 
-    //load forest
+    //load forest_snow
     this.load.image("forest1", forest1)
     this.load.image("forest2", forest2)
     this.load.image("forest3", forest3)
@@ -98,6 +103,12 @@ export default class BootScene extends Scene {
     this.load.image("forest10", forest10)
     this.load.image("forest11", forest11)
     this.load.image("forestcollision", forestcollision)
+
+    // meow
+    this.load.spritesheet('hamburg', hamburg, {frameWidth: 16, frameHeight: 16})
+    this.load.spritesheet('poppy', poppy, {frameWidth: 32, frameHeight: 32})
+    this.load.spritesheet('marshy', marshy, {frameWidth: 32, frameHeight: 32})
+    this.load.spritesheet('marshy2', marshy, {frameWidth: 32, frameHeight: 32})
 
     //Stuff for main menu
     this.load.audio('theme', [menuMusicMp3, menuMusic])
@@ -132,6 +143,30 @@ export default class BootScene extends Scene {
     this.anims.create( {
       key: 'intenseidle',
       frames: this.anims.generateFrameNumbers('char1', { start: 0, end: 4 }),
+      frameRate: 10,
+      repeat: -1
+    })
+    this.anims.create({
+      key: 'idleham',
+      frames: this.anims.generateFrameNumbers('hamburg', { start: 0, end: 3 }),
+      frameRate: 10,
+      repeat: -1
+    })
+    this.anims.create( {
+      key: 'poppyidle',
+      frames: this.anims.generateFrameNumbers('poppy', { start: 5, end: 9 }),
+      frameRate: 10,
+      repeat: -1
+    })
+    this.anims.create( {
+      key: 'marshyidle',
+      frames: this.anims.generateFrameNumbers('marshy', { start: 0, end: 5 }),
+      frameRate: 10,
+      repeat: -1
+    })
+    this.anims.create( {
+      key: 'marshyfire',
+      frames: this.anims.generateFrameNumbers('marshy', { start: 10, end: 19 }),
       frameRate: 10,
       repeat: -1
     })

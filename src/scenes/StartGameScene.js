@@ -1,7 +1,7 @@
 import { Scene } from 'phaser'
 
 import MainCharacter from '../classes/characters/MainCharacter'
-import forestJSON from '../assets/maps/forest/forest.json'
+import forestJSON from '../assets/maps/forest_snow/forest.json'
 
 var image1
 var tween
@@ -100,6 +100,7 @@ export default class StartGameScene extends Scene {
     this.forest3 = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, this.game.config.width, 793, 'forest3')
 
     this.forest2 = this.add.tileSprite(this.cameras.main.centerX, this.cameras.main.centerY, this.game.config.width, 793, 'forest2')
+    this.hamburg = this
 
 
     this.player = new MainCharacter({
@@ -130,6 +131,26 @@ export default class StartGameScene extends Scene {
     var buttonStartY = logo.y+160;
     var paddingBetweenButtons = 25;
     var buttonScale = 2
+
+    this.hamburg = this.physics.add.sprite(300, 455, 'hamburg')
+    this.hamburg.setCollideWorldBounds(true)
+    this.hamburg.setScale(2)
+    this.hamburg.anims.play('idleham', true)
+
+    this.poppy = this.physics.add.sprite(350, 455, 'poppy')
+    this.poppy.setCollideWorldBounds(true)
+    this.poppy.setScale(2)
+    this.poppy.anims.play('poppyidle', true)
+
+    this.marshy = this.physics.add.sprite(400, 455, 'marshy')
+    this.marshy.setCollideWorldBounds(true)
+    this.marshy.setScale(2)
+    this.marshy.anims.play('marshyidle', true)
+
+    // this.marshy2 = this.physics.add.sprite(500, 455, 'marshy2')
+    // this.marshy2.setCollideWorldBounds(true)
+    // this.marshy2.setScale(2)
+    // this.marshy2.anims.play('marshyfire', true)
 
     this.button_resume = this.add.sprite(buttonStartX, buttonStartY, 'buttons').setFrame(0).setScale(buttonScale)
     this.button_newgame = this.add.sprite(buttonStartX, this.button_resume.y + (this.button_resume.height*buttonScale) + paddingBetweenButtons, 'buttons').setFrame(2).setScale(buttonScale)
